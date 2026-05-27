@@ -812,6 +812,628 @@
 .btn-cancel:hover { background: rgba(239,68,68,0.06); }
 
 /* ═══════════════════════════════════════════════════
+   SIDEBAR — SECTION LABELS & BADGE
+   ═══════════════════════════════════════════════════ */
+.adash-nav-section { margin-bottom: 4px; }
+
+.adash-nav-section-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  padding: 10px 14px 4px;
+}
+
+.adash-nav-badge {
+  margin-left: auto;
+  background: #ef4444;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 9999px;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+/* ═══════════════════════════════════════════════════
+   PASSENGERS TAB
+   ═══════════════════════════════════════════════════ */
+.adm-pax-stats {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+.adm-pstat { display: flex; flex-direction: column; align-items: center; gap: 1px; min-width: 44px; }
+.adm-pstat-val { font-size: 15px; font-weight: 800; color: var(--navy); }
+.adm-pstat-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ═══════════════════════════════════════════════════
+   DRIVER APPLICATIONS TAB
+   ═══════════════════════════════════════════════════ */
+.adm-sub-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.adm-app-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  transition: box-shadow 0.15s;
+}
+.adm-app-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+.adm-app-card--pending { border-color: #fde68a; background: #fffbeb; }
+
+.adm-app-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+.adm-approve-btn {
+  padding: 8px 14px;
+  border: 1.5px solid #a7f3d0;
+  border-radius: 8px;
+  background: #f0fdf4;
+  color: #16a34a;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.adm-approve-btn:hover    { background: #dcfce7; border-color: #6ee7b7; }
+.adm-approve-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.adm-reject-btn {
+  padding: 8px 14px;
+  border: 1.5px solid #fecaca;
+  border-radius: 8px;
+  background: #fff5f5;
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.adm-reject-btn:hover    { background: #fee2e2; border-color: #fca5a5; }
+.adm-reject-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.adm-verified-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.adm-alert-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: #fef3c7;
+  color: #d97706;
+}
+
+/* ═══════════════════════════════════════════════════
+   LIVE TRACKER TAB
+   ═══════════════════════════════════════════════════ */
+.adm-tracker-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+  align-items: start;
+}
+
+.adm-tracker-map {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 480px;
+}
+
+.adm-map-placeholder {
+  width: 100%;
+  height: 480px;
+  background: #f0f2f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.adm-tracker-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 560px;
+  overflow-y: auto;
+}
+
+.adm-tracker-card-top {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.adm-tracker-who {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.adm-tracker-status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: blink-dot 1.4s infinite;
+  flex-shrink: 0;
+}
+.adm-tracker-status-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #16a34a;
+  font-weight: 700;
+}
+.adm-tracker-pickup, .adm-tracker-dest {
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.adm-tracker-fare { font-size: 13px; font-weight: 700; color: var(--navy); }
+.adm-tracker-time { font-size: 11px; color: var(--muted); }
+
+/* ═══════════════════════════════════════════════════
+   FARE MANAGEMENT TAB
+   ═══════════════════════════════════════════════════ */
+.adm-fare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.adm-fare-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.adm-fare-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.adm-fare-icon { font-size: 32px; }
+.adm-fare-vehicle { font-size: 16px; font-weight: 800; color: var(--navy); text-transform: capitalize; }
+.adm-fare-rows { display: flex; flex-direction: column; gap: 8px; }
+.adm-fare-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+}
+.adm-fare-form { display: flex; flex-direction: column; gap: 10px; }
+.adm-fare-field {
+  padding: 9px 12px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #fafafa;
+}
+.adm-fare-field:focus { border-color: var(--navy); background: #fff; }
+.adm-fare-btns { display: flex; gap: 8px; }
+.adm-fare-save {
+  flex: 1;
+  padding: 9px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.adm-fare-save:hover    { opacity: 0.85; }
+.adm-fare-save:disabled { opacity: 0.5; cursor: not-allowed; }
+.adm-fare-cancel {
+  padding: 9px 14px;
+  background: #f3f4f6;
+  color: var(--navy);
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+.adm-fare-edit {
+  width: 100%;
+  padding: 9px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.adm-fare-edit:hover { border-color: var(--navy); }
+.adm-fare-saved-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: #dcfce7;
+  color: #16a34a;
+  text-align: center;
+}
+.adm-fare-sample { font-size: 12px; color: var(--muted); }
+.adm-fare-note {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #92400e;
+}
+
+/* ═══════════════════════════════════════════════════
+   PAYMENTS TAB
+   ═══════════════════════════════════════════════════ */
+.adm-payment-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.adm-pay-method-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.adm-pay-method-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.adm-pay-icon  { font-size: 24px; }
+.adm-pay-name  { font-size: 14px; font-weight: 700; color: var(--navy); text-transform: capitalize; }
+.adm-pay-count { font-size: 12px; color: var(--muted); }
+.adm-pay-total { font-size: 20px; font-weight: 800; color: var(--navy); }
+.adm-pay-pct   { font-size: 12px; color: var(--muted); font-weight: 600; }
+.adm-pay-bar-track {
+  width: 100%;
+  height: 6px;
+  background: #f3f4f6;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.adm-pay-bar-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 9999px;
+  transition: width 0.6s ease;
+}
+
+/* ═══════════════════════════════════════════════════
+   DONATIONS / MOOL NGO TAB
+   ═══════════════════════════════════════════════════ */
+.adm-mool-banner {
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+  border-radius: 16px;
+  padding: 28px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #fff;
+  flex-wrap: wrap;
+}
+.adm-mool-logo  { font-size: 48px; flex-shrink: 0; }
+.adm-mool-title { font-size: 20px; font-weight: 800; }
+.adm-mool-desc  { font-size: 13px; opacity: 0.75; margin-top: 4px; line-height: 1.5; }
+
+.adm-impact-section { display: flex; flex-direction: column; gap: 12px; }
+.adm-impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.adm-impact-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.adm-impact-icon { font-size: 28px; }
+.adm-impact-val  { font-size: 20px; font-weight: 800; color: var(--navy); }
+.adm-impact-lbl  { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ═══════════════════════════════════════════════════
+   SUPPORT TAB
+   ═══════════════════════════════════════════════════ */
+.adm-support-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow 0.15s;
+}
+.adm-support-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+.adm-support-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.adm-support-who  { font-size: 13px; font-weight: 700; color: var(--navy); }
+.adm-support-route { display: flex; flex-direction: column; gap: 4px; }
+.adm-support-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  padding-top: 6px;
+  border-top: 1px solid #f3f4f6;
+}
+.adm-support-note {
+  font-size: 12px;
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════
+   AUDIT LOG TAB
+   ═══════════════════════════════════════════════════ */
+.adm-audit-list {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.adm-audit-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 0.1s;
+}
+.adm-audit-row:last-child { border-bottom: none; }
+.adm-audit-row:hover { background: #fafafa; }
+.adm-audit-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.adm-audit-info { flex: 1; min-width: 0; }
+.adm-audit-label  { font-size: 13px; font-weight: 600; color: var(--navy); }
+.adm-audit-detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.adm-audit-time   { font-size: 11px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════════════
+   DATA EXPORT TAB
+   ═══════════════════════════════════════════════════ */
+.adm-export-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.adm-export-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.adm-export-icon  { font-size: 36px; }
+.adm-export-title { font-size: 16px; font-weight: 800; color: var(--navy); }
+.adm-export-desc  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.adm-export-btn {
+  padding: 11px 20px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity 0.15s;
+}
+.adm-export-btn:hover    { opacity: 0.85; }
+.adm-export-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ═══════════════════════════════════════════════════
+   TEAM TAB
+   ═══════════════════════════════════════════════════ */
+.adm-team-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: box-shadow 0.15s;
+}
+.adm-team-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+.adm-team-tip {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #92400e;
+  margin-bottom: 4px;
+}
+
+/* ═══════════════════════════════════════════════════
+   SETTINGS TAB
+   ═══════════════════════════════════════════════════ */
+.adm-settings-section {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.adm-settings-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: -4px;
+}
+.adm-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.adm-settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.adm-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 0;
+}
+.adm-toggle-label { font-size: 14px; font-weight: 600; color: var(--navy); }
+.adm-toggle-desc  { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+.adm-toggle-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.adm-toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+.adm-toggle-knob {
+  position: absolute;
+  inset: 0;
+  background: #d1d5db;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.adm-toggle-knob::before {
+  content: '';
+  position: absolute;
+  width: 18px; height: 18px;
+  left: 3px; top: 3px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.adm-toggle-switch input:checked + .adm-toggle-knob { background: var(--navy); }
+.adm-toggle-switch input:checked + .adm-toggle-knob::before { transform: translateX(20px); }
+
+/* ═══════════════════════════════════════════════════
+   COMING SOON TAB
+   ═══════════════════════════════════════════════════ */
+.adm-coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  gap: 14px;
+  text-align: center;
+}
+.adm-coming-icon  { font-size: 56px; margin-bottom: 4px; }
+.adm-coming-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  background: #ede9fe;
+  color: #7c3aed;
+  letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════════════════
+   TABLE — additional helpers
+   ═══════════════════════════════════════════════════ */
+.adm-td-muted { color: var(--muted) !important; font-weight: 400 !important; }
+.adm-user-list { display: flex; flex-direction: column; gap: 10px; }
+
+/* adm-empty (used in RidesTab) */
+.adm-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 20px;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.adm-empty span { font-size: 40px; }
+
+/* ═══════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════ */
 @media (max-width: 900px) {
@@ -835,7 +1457,21 @@
 }
 
 @media (max-width: 480px) {
-  .adm-analytics-summary { grid-template-columns: repeat(2, 1fr); }
-  .adm-user-actions      { flex-wrap: wrap; justify-content: flex-end; }
-  .adm-driver-card       { flex-direction: column; align-items: flex-start; }
+  .adm-analytics-summary  { grid-template-columns: repeat(2, 1fr); }
+  .adm-user-actions       { flex-wrap: wrap; justify-content: flex-end; }
+  .adm-driver-card        { flex-direction: column; align-items: flex-start; }
+  .adm-fare-grid          { grid-template-columns: 1fr; }
+  .adm-payment-methods    { grid-template-columns: 1fr; }
+  .adm-export-grid        { grid-template-columns: 1fr; }
+  .adm-impact-grid        { grid-template-columns: repeat(2, 1fr); }
+  .adm-settings-grid      { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  .adm-notify-wrap        { grid-template-columns: 1fr; }
+  .adm-analytics-summary  { grid-template-columns: repeat(2, 1fr); }
+  .adm-tracker-layout     { grid-template-columns: 1fr; }
+  .adm-payment-methods    { grid-template-columns: repeat(2, 1fr); }
+  .adm-impact-grid        { grid-template-columns: repeat(2, 1fr); }
+  .adm-fare-grid          { grid-template-columns: repeat(2, 1fr); }
 }
