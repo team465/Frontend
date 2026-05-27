@@ -22,16 +22,38 @@ const makePin = (color) =>
 const GREEN_PIN = makePin('#22c55e');
 const RED_PIN   = makePin('#ef4444');
 
+// Parse "lat, lon" coordinate strings directly (produced by the GPS button)
+function parseCoordString(str) {
+  if (!str) return null;
+  const m = str.trim().match(/^(-?\d+\.?\d*),\s*(-?\d+\.?\d*)$/);
+  if (m) return [parseFloat(m[1]), parseFloat(m[2])];
+  return null;
+}
+
 async function geocode(address) {
   if (!address?.trim()) return null;
+
+  // If the address is already a "lat,lon" pair, use it directly
+  const coord = parseCoordString(address);
+  if (coord) return coord;
+
   try {
-    const res = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`,
-      { headers: { 'Accept-Language': 'en' } }
-    );
-    const data = await res.json();
-    if (!data[0]) return null;
-    return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+    // Try Cambodia-scoped search first for faster, more accurate results
+    const trySearch = async (extra = '') => {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1${extra}`,
+        { headers: { 'Accept-Language': 'en' } }
+      );
+      const data = await res.json();
+      return data[0] ? [parseFloat(data[0].lat), parseFloat(data[0].lon)] : null;
+    };
+
+    // First attempt: bias toward Cambodia
+    const local = await trySearch('&countrycodes=kh');
+    if (local) return local;
+
+    // Second attempt: global fallback
+    return await trySearch();
   } catch {
     return null;
   }
@@ -39,14 +61,24 @@ async function geocode(address) {
 
 async function fetchRoute(from, to) {
   try {
-    const url = `https://router.project-osrm.org/route/v1/driving/${from[1]},${from[0]};${to[1]},${to[0]}?overview=full&geometries=geojson`;
-    const res  = await fetch(url);
+    const url =
+      `https://router.project-osrm.org/route/v1/driving/` +
+      `${from[1]},${from[0]};${to[1]},${to[0]}?overview=full&geometries=geojson`;
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 5000); // 5 s timeout
+
+    const res  = await fetch(url, { signal: controller.signal });
+    clearTimeout(timer);
+
     const data = await res.json();
     if (data.routes?.[0]) {
       return data.routes[0].geometry.coordinates.map(([lng, lat]) => [lat, lng]);
     }
-  } catch {}
-  return [from, to]; // fallback: straight line
+  } catch {
+    // OSRM unavailable or timed out — fall through to straight line
+  }
+  return [from, to];
 }
 
 function BoundsController({ points }) {
@@ -68,29 +100,40 @@ const DEFAULT_CENTER = [11.5564, 104.9282];
 export default function RideMap({ pickup, destination, height = 240, className = '' }) {
   const [pickupCoord, setPickupCoord] = useState(null);
   const [destCoord,   setDestCoord]   = useState(null);
-  const [route, setRoute]             = useState(null);
+  const [route,       setRoute]       = useState(null);
+  const [status,      setStatus]      = useState(''); // 'locating' | 'routing' | ''
   const pickupTimer = useRef(null);
   const destTimer   = useRef(null);
 
   useEffect(() => {
     clearTimeout(pickupTimer.current);
     if (!pickup?.trim()) { setPickupCoord(null); return; }
+    setStatus('locating');
     pickupTimer.current = setTimeout(async () => {
-      setPickupCoord(await geocode(pickup));
-    }, 900);
+      const coord = await geocode(pickup);
+      setPickupCoord(coord);
+      if (!coord) setStatus('');
+    }, 600);
   }, [pickup]);
 
   useEffect(() => {
     clearTimeout(destTimer.current);
     if (!destination?.trim()) { setDestCoord(null); return; }
+    setStatus('locating');
     destTimer.current = setTimeout(async () => {
-      setDestCoord(await geocode(destination));
-    }, 900);
+      const coord = await geocode(destination);
+      setDestCoord(coord);
+      if (!coord) setStatus('');
+    }, 600);
   }, [destination]);
 
   useEffect(() => {
     if (pickupCoord && destCoord) {
-      fetchRoute(pickupCoord, destCoord).then(setRoute);
+      setStatus('routing');
+      fetchRoute(pickupCoord, destCoord).then(r => {
+        setRoute(r);
+        setStatus('');
+      });
     } else {
       setRoute(null);
     }
@@ -99,9 +142,19 @@ export default function RideMap({ pickup, destination, height = 240, className =
   const visiblePoints = [pickupCoord, destCoord].filter(Boolean);
 
   return (
-    <div className={`ride-map-wrap ${className}`} style={{ height }}>
+    <div className={`ride-map-wrap ${className}`} style={{ height, position: 'relative' }}>
+      {status && (
+        <div style={{
+          position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
+          background: 'rgba(0,0,0,0.65)', color: '#fff', fontSize: 11,
+          padding: '3px 10px', borderRadius: 20, zIndex: 1000, pointerEvents: 'none',
+        }}>
+          {status === 'routing' ? '🗺 Finding route…' : '📍 Locating…'}
+        </div>
+      )}
+
       <MapContainer
-        center={visiblePoints[0] || DEFAULT_CENTER}
+        center={DEFAULT_CENTER}
         zoom={13}
         style={{ width: '100%', height: '100%' }}
         zoomControl={false}
@@ -114,7 +167,7 @@ export default function RideMap({ pickup, destination, height = 240, className =
         {route && (
           <Polyline
             positions={route}
-            pathOptions={{ color: '#111e2c', weight: 5, opacity: 0.8 }}
+            pathOptions={{ color: '#3b82f6', weight: 5, opacity: 0.85 }}
           />
         )}
       </MapContainer>

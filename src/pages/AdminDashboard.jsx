@@ -7,19 +7,35 @@ import UsersTab              from '../components/admin/UsersTab';
 import DriversTab            from '../components/admin/DriversTab';
 import PassengersTab         from '../components/admin/PassengersTab';
 import DriverApplicationsTab from '../components/admin/DriverApplicationsTab';
+import ProfileRequestsTab    from '../components/admin/ProfileRequestsTab';
+import WaitlistTab           from '../components/admin/WaitlistTab';
+import DriverLeadsTab        from '../components/admin/DriverLeadsTab';
 import RidesTab              from '../components/admin/RidesTab';
 import SupportTab            from '../components/admin/SupportTab';
 import LiveTrackerTab        from '../components/admin/LiveTrackerTab';
+import SafetyTab             from '../components/admin/SafetyTab';
+import OnboardingFunnelTab   from '../components/admin/OnboardingFunnelTab';
+import IncidentsTab          from '../components/admin/IncidentsTab';
+import DisputesTab           from '../components/admin/DisputesTab';
+import TrafficMessagesTab    from '../components/admin/TrafficMessagesTab';
 import FareManagementTab     from '../components/admin/FareManagementTab';
 import AnalyticsTab          from '../components/admin/AnalyticsTab';
 import PaymentsTab           from '../components/admin/PaymentsTab';
+import WithdrawalsTab        from '../components/admin/WithdrawalsTab';
 import DonationsTab          from '../components/admin/DonationsTab';
 import AuditLogTab           from '../components/admin/AuditLogTab';
 import DataExportTab         from '../components/admin/DataExportTab';
 import NotificationsTab      from '../components/admin/NotificationsTab';
+import CommunicationsTab     from '../components/admin/CommunicationsTab';
+import EntFinanceTab         from '../components/admin/EntFinanceTab';
+import EntComplianceTab      from '../components/admin/EntComplianceTab';
+import HotelPartnersTab      from '../components/admin/HotelPartnersTab';
+import InvestorAccessTab     from '../components/admin/InvestorAccessTab';
+import EventsLogTab          from '../components/admin/EventsLogTab';
+import ContentManagerTab     from '../components/admin/ContentManagerTab';
+import SeoManagementTab      from '../components/admin/SeoManagementTab';
 import TeamTab               from '../components/admin/TeamTab';
 import SettingsTab           from '../components/admin/SettingsTab';
-import ComingSoonTab         from '../components/admin/ComingSoonTab';
 import NotificationBell      from '../components/NotificationBell';
 import './AdminDashboard.css';
 
@@ -43,20 +59,20 @@ const NAV_SECTIONS = [
   {
     label: 'OPERATIONS',
     items: [
-      { id: 'live-tracker',     icon: '📍', label: 'Live Tracker'     },
-      { id: 'safety',           icon: '🛡️', label: 'Safety'           },
-      { id: 'onboarding-funnel',icon: '🔰', label: 'Onboarding Funnel' },
-      { id: 'incidents',        icon: '⚠️', label: 'Incidents'        },
-      { id: 'disputes',         icon: '⚖️', label: 'Disputes'         },
-      { id: 'fare-management',  icon: '💲', label: 'Fare Management'  },
+      { id: 'live-tracker',      icon: '📍', label: 'Live Tracker'      },
+      { id: 'safety',            icon: '🛡️', label: 'Safety'            },
+      { id: 'onboarding-funnel', icon: '🔰', label: 'Onboarding Funnel' },
+      { id: 'incidents',         icon: '⚠️', label: 'Incidents'         },
+      { id: 'disputes',          icon: '⚖️', label: 'Disputes'          },
+      { id: 'fare-management',   icon: '💲', label: 'Fare Management'   },
     ],
   },
   {
     label: 'RIDES & SUPPORT',
     items: [
-      { id: 'rides',            icon: '🛺', label: 'All Rides'         },
-      { id: 'support',          icon: '🎧', label: 'Support', badge: '4' },
-      { id: 'traffic-messages', icon: '🚦', label: 'Traffic Messages'  },
+      { id: 'rides',            icon: '🛺', label: 'All Rides'        },
+      { id: 'support',          icon: '🎧', label: 'Support'          },
+      { id: 'traffic-messages', icon: '🚦', label: 'Traffic Messages' },
     ],
   },
   {
@@ -110,11 +126,11 @@ const NAV_SECTIONS = [
   {
     label: 'SYSTEM',
     items: [
-      { id: 'analytics',   icon: '📉', label: 'Analytics'   },
-      { id: 'events-log',  icon: '🗒️', label: 'Events Log'  },
-      { id: 'team',        icon: '👤', label: 'Team'        },
-      { id: 'settings',    icon: '⚙️', label: 'Settings'    },
-      { id: 'notifications',icon: '🔔', label: 'Notifications' },
+      { id: 'analytics',    icon: '📉', label: 'Analytics'    },
+      { id: 'events-log',   icon: '🗒️', label: 'Events Log'   },
+      { id: 'team',         icon: '👤', label: 'Team'         },
+      { id: 'settings',     icon: '⚙️', label: 'Settings'     },
+      { id: 'notifications', icon: '🔔', label: 'Notifications' },
     ],
   },
 ];
@@ -123,24 +139,41 @@ const ALL_ITEMS = NAV_SECTIONS.flatMap(s => s.items);
 
 function renderTab(id) {
   switch (id) {
-    case 'overview':           return <OverviewTab />;
-    case 'driver-applications':return <DriverApplicationsTab />;
-    case 'drivers':            return <DriversTab />;
-    case 'passengers':         return <PassengersTab />;
-    case 'rides':              return <RidesTab />;
-    case 'support':            return <SupportTab />;
-    case 'live-tracker':       return <LiveTrackerTab />;
-    case 'fare-management':    return <FareManagementTab />;
-    case 'analytics':          return <AnalyticsTab />;
-    case 'payments':           return <PaymentsTab />;
-    case 'donations':          return <DonationsTab />;
-    case 'mool-ngo':           return <DonationsTab />;
-    case 'audit-log':          return <AuditLogTab />;
-    case 'data-export':        return <DataExportTab />;
-    case 'notifications':      return <NotificationsTab />;
-    case 'team':               return <TeamTab />;
-    case 'settings':           return <SettingsTab />;
-    default:                   return <ComingSoonTab label={ALL_ITEMS.find(i => i.id === id)?.label || id} />;
+    case 'overview':            return <OverviewTab />;
+    case 'driver-applications': return <DriverApplicationsTab />;
+    case 'drivers':             return <DriversTab />;
+    case 'passengers':          return <PassengersTab />;
+    case 'profile-requests':    return <ProfileRequestsTab />;
+    case 'waitlist':            return <WaitlistTab />;
+    case 'driver-leads':        return <DriverLeadsTab />;
+    case 'rides':               return <RidesTab />;
+    case 'support':             return <SupportTab />;
+    case 'live-tracker':        return <LiveTrackerTab />;
+    case 'safety':              return <SafetyTab />;
+    case 'onboarding-funnel':   return <OnboardingFunnelTab />;
+    case 'incidents':           return <IncidentsTab />;
+    case 'disputes':            return <DisputesTab />;
+    case 'traffic-messages':    return <TrafficMessagesTab />;
+    case 'fare-management':     return <FareManagementTab />;
+    case 'analytics':           return <AnalyticsTab />;
+    case 'payments':            return <PaymentsTab />;
+    case 'withdrawals':         return <WithdrawalsTab />;
+    case 'donations':           return <DonationsTab />;
+    case 'mool-ngo':            return <DonationsTab />;
+    case 'audit-log':           return <AuditLogTab />;
+    case 'data-export':         return <DataExportTab />;
+    case 'notifications':       return <NotificationsTab />;
+    case 'communications':      return <CommunicationsTab />;
+    case 'ent-finance':         return <EntFinanceTab />;
+    case 'ent-compliance':      return <EntComplianceTab />;
+    case 'hotel-partners':      return <HotelPartnersTab />;
+    case 'investor-access':     return <InvestorAccessTab />;
+    case 'events-log':          return <EventsLogTab />;
+    case 'content-manager':     return <ContentManagerTab />;
+    case 'seo':                 return <SeoManagementTab />;
+    case 'team':                return <TeamTab />;
+    case 'settings':            return <SettingsTab />;
+    default:                    return null;
   }
 }
 

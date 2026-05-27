@@ -2,6 +2,16 @@ import { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext(null);
 
+async function safeJson(res, fallbackMsg = 'Server error') {
+  const text = await res.text();
+  if (!text) throw new Error('No response from server — is the backend running?');
+  try {
+    return JSON.parse(text);
+  } catch {
+    throw new Error(fallbackMsg);
+  }
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,7 +31,7 @@ export function AuthProvider({ children }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
-    const data = await res.json();
+    const data = await safeJson(res, 'Login failed');
     if (!res.ok) throw new Error(data.error || 'Login failed');
     localStorage.setItem('token', data.token);
     setUser(data.user);
@@ -34,7 +44,7 @@ export function AuthProvider({ children }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password, role }),
     });
-    const data = await res.json();
+    const data = await safeJson(res, 'Registration failed');
     if (!res.ok) throw new Error(data.error || 'Registration failed');
     localStorage.setItem('token', data.token);
     setUser(data.user);
