@@ -1,7 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import './Home.css';
+
+const ROLE_HOME = { passenger: '/passenger', driver: '/driver', admin: '/admin' };
 
 const features = [
   { icon: '🛡️', title: 'Safety First', desc: 'All drivers are verified with background checks, ID, and vehicle inspection before going live.' },
@@ -33,6 +36,9 @@ const stats = [
 ];
 
 export default function Home() {
+  const { user, loading } = useAuth();
+  if (!loading && user) return <Navigate to={ROLE_HOME[user.role] || '/login'} replace />;
+
   return (
     <>
       <Navbar />
