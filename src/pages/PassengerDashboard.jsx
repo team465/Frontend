@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import BookTab    from '../components/passenger/BookTab';
-import MyRideTab  from '../components/passenger/MyRideTab';
-import HistoryTab from '../components/passenger/HistoryTab';
+import BookTab          from '../components/passenger/BookTab';
+import MyRideTab        from '../components/passenger/MyRideTab';
+import HistoryTab       from '../components/passenger/HistoryTab';
+import NotificationBell from '../components/NotificationBell';
+import DonateModal      from '../components/DonateModal';
 import './PassengerDashboard.css';
 
 const TABS = [
@@ -16,35 +18,37 @@ const TABS = [
 export default function PassengerDashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('book');
+  const [activeTab, setActiveTab]   = useState('book');
+  const [showDonate, setShowDonate] = useState(false);
 
-  function handleLogout() {
-    logout();
-    navigate('/login');
-  }
-
-  function handleRideCreated() {
-    setActiveTab('myride');
-  }
+  function handleLogout() { logout(); navigate('/login'); }
+  function handleRideCreated() { setActiveTab('myride'); }
 
   return (
     <div className={`pdash ${activeTab === 'book' ? 'pdash--book' : ''}`}>
 
-      {/* ── Top bar ── */}
+      {/* ── Top bar ──────────────────────────────────── */}
       <header className="pdash-header">
         <div className="pdash-header-inner">
           <div className="pdash-logo">
             <img src="/jih-logo.png" alt="Jih" width="34" height="34" />
             <span>Jih</span>
           </div>
+
+          {/* MOOL Donate button — centre */}
+          <button className="donate-trigger" onClick={() => setShowDonate(true)}>
+            <span className="donate-heart-icon">♥</span>
+            MOOL · Donate
+          </button>
+
+          {/* Right: notification bell */}
           <div className="pdash-header-right">
-            <span className="pdash-greeting">Hi, {user?.name?.split(' ')[0]} 👋</span>
-            <button className="pdash-logout" onClick={handleLogout}>Logout</button>
+            <NotificationBell />
           </div>
         </div>
       </header>
 
-      {/* ── Content ── */}
+      {/* ── Content ──────────────────────────────────── */}
       <main className="pdash-content">
         {activeTab === 'book'    && <BookTab    onRideCreated={handleRideCreated} />}
         {activeTab === 'myride'  && <MyRideTab  onTabChange={setActiveTab} />}
@@ -52,7 +56,7 @@ export default function PassengerDashboard() {
         {activeTab === 'profile' && <ProfileTab user={user} onLogout={handleLogout} />}
       </main>
 
-      {/* ── Bottom tab bar ── */}
+      {/* ── Bottom tab bar ───────────────────────────── */}
       <nav className="pdash-tabbar">
         {TABS.map(t => (
           <button
@@ -65,6 +69,9 @@ export default function PassengerDashboard() {
           </button>
         ))}
       </nav>
+
+      {/* ── Donate modal ─────────────────────────────── */}
+      {showDonate && <DonateModal onClose={() => setShowDonate(false)} />}
     </div>
   );
 }
@@ -75,10 +82,7 @@ function ProfileTab({ user, onLogout }) {
       <div className="profile-avatar">{user?.name?.charAt(0).toUpperCase()}</div>
       <h2 className="profile-name">{user?.name}</h2>
       <p className="profile-email">{user?.email}</p>
-      <span className="pill pill--blue" style={{ margin: '8px auto 0', display: 'inline-block' }}>
-        {user?.role}
-      </span>
-
+      <span className="pill pill--blue" style={{ margin: '8px auto 0', display: 'inline-block' }}>{user?.role}</span>
       <div className="profile-card">
         <div className="profile-row">
           <span>Member since</span>
@@ -89,10 +93,7 @@ function ProfileTab({ user, onLogout }) {
           <strong className="text-green">Active</strong>
         </div>
       </div>
-
-      <button className="btn-cancel" style={{ maxWidth: 300, margin: '24px auto 0' }} onClick={onLogout}>
-        Sign out
-      </button>
+      <button className="btn-cancel" style={{ maxWidth: 300, margin: '24px auto 0' }} onClick={onLogout}>Sign out</button>
     </div>
   );
 }

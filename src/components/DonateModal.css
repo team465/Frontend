@@ -1,0 +1,118 @@
+.donate-modal { max-width: 360px; text-align: center; }
+
+.donate-logo img {
+  border-radius: 12px;
+  margin: 0 auto 14px;
+  object-fit: contain;
+}
+
+.donate-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.donate-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.donate-amounts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.donate-amount-btn {
+  padding: 10px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--off);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+
+.donate-amount-btn--active {
+  border-color: var(--gold);
+  background: var(--gold-pale);
+  color: var(--navy);
+}
+
+.donate-custom-wrap {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.donate-custom-prefix {
+  padding: 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--off);
+  border-right: 1px solid var(--border);
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+.donate-custom-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--navy);
+}
+
+.donate-methods {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.donate-method {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 6px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--off);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  transition: border-color 0.15s;
+  font-family: inherit;
+}
+.donate-method span:first-child { font-size: 20px; }
+.donate-method--active { border-color: var(--gold); background: var(--gold-pale); }
+
+.donate-btn { margin-top: 0; }
+
+.donate-footer {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 10px;
+  opacity: 0.7;
+}
+
+.donate-done { padding: 12px 0; }
+.donate-heart { font-size: 52px; display: block; margin-bottom: 14px; }
+.donate-done h2 { font-size: 22px; color: var(--navy); margin-bottom: 10px; }
+.donate-done p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
