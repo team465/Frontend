@@ -52,7 +52,7 @@ export default function PassengerDashboard() {
       <main className="pdash-content">
         {activeTab === 'book'    && <BookTab    onRideCreated={handleRideCreated} />}
         {activeTab === 'myride'  && <MyRideTab  onTabChange={setActiveTab} />}
-        {activeTab === 'history' && <HistoryTab />}
+        {activeTab === 'history' && <HistoryTab onGoToBook={() => setActiveTab('book')} />}
         {activeTab === 'profile' && <ProfileTab user={user} onLogout={handleLogout} />}
       </main>
 

@@ -4,6 +4,7 @@ import PaymentSelector from './PaymentSelector';
 import FullDayTab   from './FullDayTab';
 import ScheduledTab from './ScheduledTab';
 import FavoriteTab  from './FavoriteTab';
+import RideMap from '../RideMap';
 
 const TOKEN = () => localStorage.getItem('token');
 
@@ -142,6 +143,7 @@ function StandardBook({ mode, setMode, onRideCreated }) {
         <div className="book-confirm">
           <button className="back-btn" onClick={() => setStep('form')}>← Back</button>
           <h2>Confirm your ride</h2>
+          <RideMap pickup={pickup} destination={destination} height={180} className="book-map" />
           <div className="confirm-route">
             <div className="confirm-point">
               <span className="dot dot--green" />
@@ -192,6 +194,9 @@ function StandardBook({ mode, setMode, onRideCreated }) {
               <input className="location-input" placeholder="Where to?" value={destination} onChange={e => setDestination(e.target.value)} />
             </div>
           </div>
+          {/* Map — always visible, shows pins when addresses are geocoded */}
+          <RideMap pickup={pickup} destination={destination} height={220} className="book-map" />
+
           {pickup && destination && (
             <div className="route-estimate">
               <span>📍 ~{distanceKm} km</span>

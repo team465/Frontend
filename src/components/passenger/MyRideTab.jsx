@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import RideMap from '../RideMap';
 
 const TOKEN = () => localStorage.getItem('token');
 
@@ -83,6 +84,14 @@ export default function MyRideTab({ onTabChange }) {
 
   return (
     <div className="myride">
+
+      {/* Map */}
+      <RideMap
+        pickup={ride.pickup_address}
+        destination={ride.destination_address}
+        height={220}
+        className="myride-map"
+      />
 
       {/* Status banner */}
       <div className="myride-status" style={{ background: st.color }}>

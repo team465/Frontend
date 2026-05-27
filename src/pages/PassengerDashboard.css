@@ -852,6 +852,293 @@
 .hc-fare    { font-size: 15px; font-weight: 800; color: var(--navy); }
 .hc-rating  { font-size: 12px; color: var(--gold); }
 
+/* ── Map ───────────────────────────────────────────── */
+.ride-map-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* In the booking form (dark navy background) */
+.book-map {
+  margin: 16px 0;
+}
+
+/* In My Ride (light background) */
+.myride-map {
+  margin-bottom: 16px;
+}
+
+/* Attribution link inside the map */
+.ride-map-wrap .leaflet-control-attribution {
+  font-size: 9px;
+  opacity: 0.6;
+  background: rgba(255,255,255,0.8);
+}
+
+/* ── History tab — sub-tabs ───────────────────────── */
+.hist-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.hist-tab {
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  transition: color 0.15s, border-color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hist-tab--active {
+  color: var(--navy);
+  border-bottom-color: var(--gold);
+}
+
+.hist-tab:hover:not(.hist-tab--active) { color: var(--navy); }
+
+.hist-tab-count {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.hist-tab--active .hist-tab-count { color: var(--gold-d); }
+
+/* Body + states */
+.hist-body { display: flex; flex-direction: column; gap: 10px; }
+
+.hist-loading {
+  text-align: center;
+  padding: 40px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.hist-empty {
+  text-align: center;
+  padding: 40px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Spending summary card */
+.spending-summary-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 20px;
+}
+
+.spending-label-head {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.spending-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.sg-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.sg-label {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sg-value {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+/* Ride card */
+.hist-card {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.hist-card:hover { box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+
+.hist-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.hist-date {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.hist-card-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.payment-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 2px 8px;
+  text-transform: capitalize;
+}
+
+/* Status pills for history */
+.hist-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pill-neutral { background: #f3f4f6; color: #6b7280; }
+.pill-purple  { background: #ede9fe; color: #7c3aed; }
+.pill-amber   { background: #fef3c7; color: #d97706; }
+.pill-blue    { background: #dbeafe; color: #1d4ed8; }
+.pill-green   { background: #dcfce7; color: #16a34a; }
+.pill-red     { background: #fee2e2; color: #dc2626; }
+.pill-stone   { background: #f5f5f4; color: #78716c; }
+
+/* Route */
+.hist-route {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hist-route-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.hist-addr {
+  font-size: 13px;
+  color: var(--navy);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Footer */
+.hist-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+.hist-vehicle {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.hist-btype {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.hist-fare-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hist-cancelled {
+  font-size: 12px;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.hist-fare {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.hist-paid {
+  font-size: 11px;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.hist-rating {
+  font-size: 13px;
+  color: var(--gold);
+  padding-top: 2px;
+}
+
+/* Scheduled cancel */
+.sched-actions {
+  padding: 0 4px 6px;
+}
+
+.sched-cancel-btn {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  color: #dc2626;
+  border: 1.5px solid #dc2626;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sched-cancel-btn:hover { background: rgba(220,38,38,0.06); }
+.sched-cancel-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+@media (max-width: 480px) {
+  .spending-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .hist-tabs { gap: 0; }
+  .hist-tab  { padding: 10px 12px; font-size: 13px; }
+}
+
 /* ── Profile tab ───────────────────────────────────── */
 .profile-tab { text-align: center; padding: 32px 0; }
 
