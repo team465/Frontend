@@ -1,0 +1,126 @@
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(247,248,250,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  height: 68px;
+  gap: 12px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.navbar-logo img {
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.navbar-brand-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.navbar-links a {
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--navy);
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.navbar-links a:hover { background: rgba(17,30,44,0.07); }
+
+.navbar-dash-link {
+  color: var(--gold-d) !important;
+  font-weight: 600 !important;
+}
+
+.navbar-cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 12px;
+}
+
+.navbar-login {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  padding: 7px 14px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.navbar-login:hover { background: rgba(17,30,44,0.07); }
+
+.navbar-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 6px;
+  margin-left: auto;
+}
+
+.navbar-burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: 0.2s;
+}
+
+.navbar-mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 20px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--white);
+}
+
+.navbar-mobile-menu a {
+  padding: 10px 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--navy);
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.navbar-mobile-menu a:hover { background: var(--off); }
+
+.mobile-auth {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+@media (max-width: 768px) {
+  .navbar-links,
+  .navbar-cta { display: none; }
+  .navbar-burger { display: flex; }
+  .navbar-mobile-menu { display: flex; }
+}

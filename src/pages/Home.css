@@ -1,0 +1,343 @@
+/* ── Hero ─────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 68px;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.03);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(17,30,44,0.82) 0%,
+    rgba(17,30,44,0.55) 60%,
+    rgba(17,30,44,0.7) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  padding-top: 100px;
+  padding-bottom: 60px;
+  max-width: 700px;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.08;
+  margin-bottom: 20px;
+}
+
+.hero-title-em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: rgba(255,255,255,0.70);
+  max-width: 520px;
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-btn { font-size: 16px; padding: 14px 32px; }
+
+.hero-stats {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: rgba(17,30,44,0.85);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 0;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+
+.hero-stat:last-child { border-right: none; }
+
+.hero-stat-value {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.hero-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+}
+
+/* ── Sections ─────────────────────────────────────── */
+.section {
+  padding: 96px 0;
+}
+
+.section-navy {
+  background: var(--navy);
+}
+
+.section-gold {
+  background: var(--gold);
+}
+
+.section-head {
+  text-align: center;
+  max-width: 580px;
+  margin: 0 auto 56px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  margin-bottom: 14px;
+}
+
+.section-sub {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── Vehicles ─────────────────────────────────────── */
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.vehicle-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.vehicle-img-wrap {
+  height: 200px;
+  overflow: hidden;
+  background: var(--off);
+}
+
+.vehicle-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.vehicle-card:hover .vehicle-img-wrap img { transform: scale(1.05); }
+
+.vehicle-info {
+  padding: 22px;
+}
+
+.vehicle-info h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.vehicle-info p {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.vehicle-cta {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold-d);
+  transition: color 0.15s;
+}
+
+.vehicle-cta:hover { color: var(--navy); }
+
+/* ── Steps ────────────────────────────────────────── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.step-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 30px 24px;
+  transition: background 0.2s;
+}
+
+.step-card:hover { background: rgba(255,255,255,0.08); }
+
+.step-num {
+  display: block;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 14px;
+  opacity: 0.9;
+}
+
+.step-card h3 {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.step-card p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+}
+
+/* ── Features ─────────────────────────────────────── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.feature-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.feature-icon {
+  font-size: 30px;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.feature-card h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── Driver CTA ───────────────────────────────────── */
+.driver-cta-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.driver-cta-text h2 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin-bottom: 14px;
+  color: var(--navy);
+}
+
+.driver-cta-text p {
+  font-size: 16px;
+  color: rgba(17,30,44,0.65);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.driver-cta-img img {
+  width: 100%;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+/* ── MOOL NGO ─────────────────────────────────────── */
+.mool-inner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.mool-img img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: var(--radius);
+}
+
+.mool-text h2 {
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  margin-bottom: 14px;
+}
+
+.mool-text p {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* ── Final CTA ────────────────────────────────────── */
+.final-cta { padding: 120px 0; }
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .vehicle-grid,
+  .steps-grid,
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .driver-cta-inner { grid-template-columns: 1fr; }
+  .driver-cta-img { display: none; }
+  .mool-inner { grid-template-columns: 1fr; }
+  .mool-img { display: none; }
+}
+
+@media (max-width: 600px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .vehicle-grid,
+  .features-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .section { padding: 64px 0; }
+  .hero-content { padding-bottom: 40px; }
+}
